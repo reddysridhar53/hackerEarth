@@ -1,0 +1,53 @@
+<section id="mainSection">
+  <div class="container">
+    <div id="header">
+      <div class="row m0">
+        <div class="col-lg-12 col-md-12 col-sm-12 p0">
+          <h1>Games Arena</h1>
+          <span>A hub of games for all Gaming Consoles.</span>
+        </div>
+      </div>
+    </div>
+    <div id="inputOuter">
+      <div id="inputInner">
+        <div class="row m0">
+          <div class="col-lg-12 col-md-12 col-sm-12 p0">
+            <div class="input-button">
+              <input name="game-search" type="text"
+              [(ngModel)]="searchTitle"
+              class="form-control" placeholder="Search Game">
+              <select (change)="selectedOption($event.target.value)">
+                <option value="null" selected="selected">Sort Games</option>
+                <option *ngFor="let option of sortOptions" [value]="option.name">
+                  {{option.name}}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="contentConatiner">
+      <div *ngFor="let game of games | title : searchTitle | orderBy : { property : option, direction : high }" class="game-card">
+        <div class="game-image">
+          <img [src]="getImage(game)" alt="{{game.title}}">
+        </div>
+        <div class="game-title">
+          {{game.title}}
+        </div>
+        <div class="game-info">
+          <div>
+            <span>Platform:</span> <span>{{game.platform}}</span>
+          </div>
+          <div>
+            <span>Genre:</span> <span>{{game.genre}}</span>
+          </div>
+        </div>
+        <div class="game-stats">
+          <span>Score:</span> <span>{{game.score}}</span>
+          <span>Editers Choice:</span> <span> {{game.editors_choice}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
